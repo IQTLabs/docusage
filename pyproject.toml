@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "docusage"
+version = "0.1.0"
+description = "A system to analyze documents using Large Language Models (LLMs), providing summaries and contextual information based on user specified missions."
+authors = ["JJ Ben-Joseph <jj@tensorspace.ai>"]
+license = "Apache"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+langchain = "^0.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.5"
+
+[tool.poetry.scripts]
+docusage = "docusage:__main__.main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
