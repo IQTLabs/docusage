@@ -12,7 +12,11 @@ def main():
         description="Analyze documents using Large Language Models."
     )
     parser.add_argument(
-        "files", metavar="F", type=str, nargs="+", help="a list of files to be analyzed"
+        "files",
+        metavar="FILES",
+        type=str,
+        nargs="+",
+        help="a list of files to be analyzed",
     )
     parser.add_argument(
         "--mission", "-m", type=str, required=False, help="an optional mission prompt"
