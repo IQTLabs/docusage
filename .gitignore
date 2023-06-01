@@ -4,6 +4,9 @@ data/
 # macOS stuff
 .DS_Store
 
+# Chroma files
+.chroma/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
