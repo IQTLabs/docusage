@@ -25,7 +25,7 @@ def main():
     args = parser.parse_args()
 
     files = args.files
-    prompt = args.prompt
+    prompt = args.mission
 
     print("Files:", files)
     if prompt:
