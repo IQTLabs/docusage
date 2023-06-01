@@ -13,6 +13,9 @@
         "plaintext",
         "restructuredtext"
     ],
-    "python.formatting.provider": "black",
-    "editor.formatOnSave": true
+    "python.formatting.provider": "none",
+    "editor.formatOnSave": true,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    }
 }
