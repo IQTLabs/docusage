@@ -28,6 +28,32 @@ The `--mission` or `-m` option allows you to specify a mission prompt, such as "
 
 After running this command, DocuSage will process the provided files and display the results. Note that the `--mission` option is optional. If you don't provide a prompt, DocuSage will perform a default analysis of the documents.
 
+Certainly, here's a section you can add to the README to explain the requirement for an OpenAI API key:
+
+### OpenAI API Key Requirement
+
+To use DocuSage, you need to have an account with OpenAI and an associated API key. The API key is used to interact with OpenAI's models, which are at the core of DocuSage's document analysis capabilities.
+
+Here are the steps you need to follow to set up the OpenAI API key:
+
+1. Create an account on the [OpenAI website](https://platform.openai.com/signup/).
+
+2. After logging into your account, go to the API section. Here, you will find your API key. 
+
+3. Set your OpenAI API key as an environment variable named `OPENAI_API_KEY` in your system.
+
+    On Unix-based systems (like Linux or macOS), you can add the following line to your shell profile file (like `.bashrc`, `.bash_profile`, or `.zshrc`):
+
+    ```bash
+    export OPENAI_API_KEY="your-api-key"
+    ```
+
+    On Windows, you can set environment variables in the System Properties.
+
+Remember to replace `"your-api-key"` with your actual OpenAI API key.
+
+⚠️ **IMPORTANT:** Your OpenAI API key is sensitive information. Do not share it with others or expose it in public places like GitHub repositories.
+
 ## License
 
 DocuSage is licensed under the terms of the Apache License.
