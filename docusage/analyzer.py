@@ -24,4 +24,6 @@ class Mission:
         return self.index.query(self.description)
 
     def write_report_with_sources(self) -> str:
-        return self.index.query_with_sources(self.description)
+        result = self.index.query_with_sources(self.description)
+        del result["question"]
+        return result
