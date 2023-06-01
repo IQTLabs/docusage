@@ -1,6 +1,8 @@
 import os
 import argparse
 
+from docusage.analyzer import Mission
+
 
 def main():
     if not os.environ.get("OPENAI_API_KEY"):
@@ -27,6 +29,10 @@ def main():
     files = args.files
     prompt = args.mission
 
-    print("Files:", files)
+    print("Analyzing documents: ", files)
     if prompt:
-        print("Prompt:", prompt)
+        print("Mission prompt: ", prompt)
+        print("=" * len(prompt) + 15)
+    else:
+        print("=" * 80)
+    print(Mission(files, prompt).write_report_with_sources())
