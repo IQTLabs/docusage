@@ -28,8 +28,6 @@ The `--mission` or `-m` option allows you to specify a mission prompt, such as "
 
 After running this command, DocuSage will process the provided files and display the results. Note that the `--mission` option is optional. If you don't provide a prompt, DocuSage will perform a default analysis of the documents.
 
-Certainly, here's a section you can add to the README to explain the requirement for an OpenAI API key:
-
 ### OpenAI API Key Requirement
 
 To use DocuSage, you need to have an account with OpenAI and an associated API key. The API key is used to interact with OpenAI's models, which are at the core of DocuSage's document analysis capabilities.
