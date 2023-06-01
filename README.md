@@ -1,4 +1,4 @@
-# DocuSage
+# 🧙‍♂️ DocuSage
 
 Welcome to DocuSage - a fast, automated, and AI-fueled document analysis tool. Harnessing the power of advanced Large Language Models (LLMs), DocuSage is your efficient tool to surf through mountains of data and pinpoint precise, context-rich insights from various documents.
 
