@@ -2,8 +2,13 @@ from typing import Iterable
 from langchain.document_loaders import UnstructuredFileLoader
 from langchain.indexes import VectorstoreIndexCreator
 
-default_prompt = "What would be important to know about this document?"
-template_prompt = "How does this document relate to {source}?"
+default_prompt = (
+    "Write a report that is similar to an intelligence report using these documents."
+)
+template_prompt = (
+    "Write an intelligence report that focuses elements related to the {source} mission"
+    " using these documents."
+)
 
 
 class Mission:
