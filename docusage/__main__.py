@@ -3,6 +3,14 @@ import argparse
 
 from docusage.analyzer import Mission
 
+LOGO = r"""                                               
+     ____                  _____                
+    |    \  ___  ___  _ _ |   __| ___  ___  ___ 
+    |  |  || . ||  _|| | ||__   || .'|| . || -_|
+    |____/ |___||___||___||_____||__,||_  ||___|
+                                      |___|     
+    """
+
 
 def main():
     if not os.environ.get("OPENAI_API_KEY"):
@@ -11,7 +19,8 @@ def main():
         )
 
     parser = argparse.ArgumentParser(
-        description="Analyze documents using Large Language Models."
+        description=f"{LOGO}\nGenerate an intelligence report from a set of documents.",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
         "files",
@@ -29,6 +38,7 @@ def main():
     files = args.files
     prompt = args.mission
 
+    print(LOGO)
     print("Analyzing documents: ", files)
     if prompt:
         print("Mission: ", prompt)
