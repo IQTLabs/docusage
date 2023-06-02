@@ -2,9 +2,13 @@ from typing import Iterable
 from langchain.document_loaders import UnstructuredFileLoader
 from langchain.indexes import VectorstoreIndexCreator
 
-default_prompt = "Write a intelligence report using these documents."
+default_prompt = (
+    "Can you answer what has intelligence value in these documents, "
+    "in the style of an intelligence analyst?"
+)
 template_prompt = (
-    "Write a intelligence report for the {source} mission using these documents."
+    "Can you answer what has intelligence value related to {source} in these documents, "
+    "in the style of an intelligence analyst?"
 )
 
 
