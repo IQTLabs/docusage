@@ -13,6 +13,7 @@ openai = "^0.27"
 pdf2image = "^1.16"
 chromadb = "^0.3"
 tiktoken = "^0.4"
+fastapi = "^0.95"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"

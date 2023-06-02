@@ -1094,13 +1094,13 @@ files = [
 
 [[package]]
 name = "langchain"
-version = "0.0.188"
+version = "0.0.189"
 description = "Building applications with LLMs through composability"
 optional = false
 python-versions = ">=3.8.1,<4.0"
 files = [
-    {file = "langchain-0.0.188-py3-none-any.whl", hash = "sha256:cae3e14afb81e38e3abb69cdbb95aa161c0e7717542971e995993dff0b3fe415"},
-    {file = "langchain-0.0.188.tar.gz", hash = "sha256:58ef924d7bd7a3c06b3667384730e7c5fa6d02585558ae20ff85d5a6a1ee887b"},
+    {file = "langchain-0.0.189-py3-none-any.whl", hash = "sha256:11f9b6981000d8981a5447fe5b5b751bc90b97e7cab9b58e2f2c45bc7632fd5e"},
+    {file = "langchain-0.0.189.tar.gz", hash = "sha256:63dcf73ebe23a787ba0865a3df51a16d5a2e973d6a175b6a9f6340dd1a3ad002"},
 ]
 
 [package.dependencies]
@@ -2614,13 +2614,13 @@ test = ["black (>=22.3.0,<23.0.0)", "coverage (>=6.2,<7.0)", "isort (>=5.0.6,<6.
 
 [[package]]
 name = "typing-extensions"
-version = "4.6.2"
+version = "4.6.3"
 description = "Backported and Experimental Type Hints for Python 3.7+"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "typing_extensions-4.6.2-py3-none-any.whl", hash = "sha256:3a8b36f13dd5fdc5d1b16fe317f5668545de77fa0b8e02006381fd49d731ab98"},
-    {file = "typing_extensions-4.6.2.tar.gz", hash = "sha256:06006244c70ac8ee83fa8282cb188f697b8db25bc8b4df07be1873c43897060c"},
+    {file = "typing_extensions-4.6.3-py3-none-any.whl", hash = "sha256:88a4153d8505aabbb4e13aacb7c486c2b4a33ca3b3f807914a9b4c844c471c26"},
+    {file = "typing_extensions-4.6.3.tar.gz", hash = "sha256:d91d5919357fe7f681a9f2b5b4cb2a5f1ef0a1e9f59c4d8ff0d3491e05c0ffd5"},
 ]
 
 [[package]]
@@ -2640,13 +2640,13 @@ typing-extensions = ">=3.7.4"
 
 [[package]]
 name = "unstructured"
-version = "0.7.0"
+version = "0.7.1"
 description = "A library that prepares raw documents for downstream ML tasks."
 optional = false
 python-versions = ">=3.7.0"
 files = [
-    {file = "unstructured-0.7.0-py3-none-any.whl", hash = "sha256:06d1570e722674ea3d4b985ee8c484503edc2e0a73586a648d7056285a7f5884"},
-    {file = "unstructured-0.7.0.tar.gz", hash = "sha256:fea7c82acc720d058011a9e94f4c4348774c77d472fdf67b0e159c10a8953238"},
+    {file = "unstructured-0.7.1-py3-none-any.whl", hash = "sha256:6577b41774528ad1967852206d6aff605524d8b128167b23e81738b4ae83ce96"},
+    {file = "unstructured-0.7.1.tar.gz", hash = "sha256:d4fb7911a51c7301dad52927c97333c256311828c78e6c5b1d56b4cfc8d3394b"},
 ]
 
 [package.dependencies]
@@ -2670,7 +2670,7 @@ xlrd = "*"
 [package.extras]
 azure = ["adlfs", "fsspec"]
 discord = ["discord-py"]
-github = ["pygithub (==1.57.0)"]
+github = ["pygithub (==1.58.2)"]
 gitlab = ["python-gitlab"]
 google-drive = ["google-api-python-client"]
 huggingface = ["langdetect", "sacremoses", "sentencepiece", "torch", "transformers"]
@@ -3127,4 +3127,4 @@ cffi = ["cffi (>=1.11)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "c072fe0a0c5c7ba86014929ef9802e2f169a92caa0cc358797fad58edf4d9e10"
+content-hash = "32fb606b7cd34645b1becaa1f8d7bea8c37c9156153cbac6eb201258e0219c92"
