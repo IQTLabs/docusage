@@ -1,46 +1,66 @@
 body,
 html {
-    height: 100%;
     margin: 0;
-    display: flex;
-    flex-direction: column;
     padding: 0;
-    background-color: #333;
-    color: #fff;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
 }
 
 header {
     width: 100%;
-    background-color: #444;
-    color: #fff;
+    padding: 4px 0;
+    background-color: #2b7a78;
     text-align: center;
+    color: white;
 }
 
 #logo {
     font-family: 'Lobster', cursive;
-    color: #fff;
-    font-size: 2em;
-    text-shadow: 1px 1px #000;
+    font-size: 2.2em;
 }
 
-#dragDropArea {
-    flex-grow: 1;
-    border: 2px dashed #aaa;
+main {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background-color: #333;
-}
-
-#dragDropArea:hover {
-    border-color: #666;
-}
-
-#dragDropArea p {
-    color: #fff;
-    font-family: 'Arial', sans-serif;
-    font-size: 2em;
+    justify-content: space-around;
     padding: 20px;
-    text-shadow: 1px 1px 2px #000;
+}
+
+#uploadArea,
+#reportArea {
+    width: 40%;
+}
+
+.drag-area {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+#fileInput {
+    display: none;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    background-color: #2b7a78;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #205c5a;
+}
+
+#reportContent {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    height: 300px;
+    overflow-y: scroll;
 }

@@ -2,20 +2,29 @@
 <html>
 
 <head>
-    <title>DocuSage</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="app.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <title>DocuSage</title>
 </head>
 
 <body>
     <header>
         <h1 id="logo">🧙‍♂️ DocuSage</h1>
     </header>
-    <div id="dragDropArea" class="drag-area">
-        <input type="file" id="fileInput" multiple style="display: none;">
-        <p>🖐️ Drag and Drop Files Here<br>📂 Or Click to Select</p>
-    </div>
-
+    <main>
+        <section id="uploadArea">
+            <h2>Upload Documents</h2>
+            <div id="dragDropArea" class="drag-area">
+                <p>Drag and Drop Files Here or Click to Select</p>
+                <input type="file" id="fileInput" multiple>
+            </div>
+            <button id="createReport">Create Report</button>
+        </section>
+        <section id="reportArea">
+            <h2>Your Report</h2>
+            <div id="reportContent">Report will be displayed here...</div>
+        </section>
+    </main>
     <script src="app.js"></script>
 </body>
 

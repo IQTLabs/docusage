@@ -1,42 +1,32 @@
-var dragArea = document.getElementById("dragDropArea");
-var fileInput = document.getElementById("fileInput");
+const dropArea = document.getElementById('dragDropArea');
+const fileInput = document.getElementById('fileInput');
 
-// Highlight drop area when item is dragged over it
-dragArea.addEventListener("dragover", function (event) {
-    event.stopPropagation();
-    event.preventDefault();
-    event.dataTransfer.dropEffect = 'copy';
-    dragArea.style.borderColor = "#000";
+// Handle drag events
+dropArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropArea.style.border = '2px dashed #205c5a';
 });
 
-// Reset drop area when item is dragged out
-dragArea.addEventListener("dragleave", function (event) {
-    dragArea.style.borderColor = "#aaa";
+dropArea.addEventListener('dragleave', (e) => {
+    dropArea.style.border = '2px dashed #ccc';
 });
 
-// Handle dropped items
-dragArea.addEventListener("drop", function (event) {
-    event.stopPropagation();
-    event.preventDefault();
-
-    dragArea.style.borderColor = "#aaa";
-
-    var files = event.dataTransfer.files;
-
-    handleFiles(files);
+dropArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    fileInput.files = e.dataTransfer.files;
+    dropArea.style.border = '2px dashed #ccc';
 });
 
-// Open file selector when clicked on the drop area
-dragArea.addEventListener("click", function () {
+// Handle click event
+dropArea.addEventListener('click', (e) => {
     fileInput.click();
 });
 
-// Handle files from file dialog
-fileInput.addEventListener("change", function () {
-    handleFiles(fileInput.files);
+fileInput.addEventListener('change', (e) => {
+    console.log(fileInput.files);
 });
 
-// Handle the files
-function handleFiles(files) {
-    console.log(files);
-}
+document.getElementById('createReport').addEventListener('click', (e) => {
+    console.log('create report');
+});
+
