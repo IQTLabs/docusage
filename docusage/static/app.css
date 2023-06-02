@@ -1,0 +1,46 @@
+body,
+html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    background-color: #333;
+    color: #fff;
+}
+
+header {
+    width: 100%;
+    background-color: #444;
+    color: #fff;
+    text-align: center;
+}
+
+#logo {
+    font-family: 'Lobster', cursive;
+    color: #fff;
+    font-size: 2em;
+    text-shadow: 1px 1px #000;
+}
+
+#dragDropArea {
+    flex-grow: 1;
+    border: 2px dashed #aaa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #333;
+}
+
+#dragDropArea:hover {
+    border-color: #666;
+}
+
+#dragDropArea p {
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    font-size: 2em;
+    padding: 20px;
+    text-shadow: 1px 1px 2px #000;
+}
