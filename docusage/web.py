@@ -1,6 +1,6 @@
 import tempfile
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
@@ -12,7 +12,9 @@ app = FastAPI()
 
 
 @app.post("/create_report")
-async def create_report(files: List[UploadFile] = File(...)):
+async def create_report(
+    files: List[UploadFile] = File(...), mission: Optional[str] = None
+):
     with tempfile.TemporaryDirectory() as tempdir:
         temppaths = []
         for file in files:
@@ -22,7 +24,7 @@ async def create_report(files: List[UploadFile] = File(...)):
             with open(temppath, "wb") as f:
                 f.write(contents)
             await file.close()
-        report_content = Mission(temppaths).write_report()
+        report_content = Mission(temppaths, mission).write_report()
 
     return JSONResponse(content={"content": report_content})
 

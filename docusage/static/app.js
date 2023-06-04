@@ -38,7 +38,10 @@ document.getElementById('createReport').addEventListener('click', async (e) => {
     Array.from(fileInput.files).forEach((file, index) => {
         formData.append("files", file);
     });
-
+    const mission = document.getElementById('missionInput').value;
+    if (mission !== '') {
+        formData.append("mission", mission);
+    }
     const response = await fetch('/create_report', {
         method: 'POST',
         body: formData,
