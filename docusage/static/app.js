@@ -22,6 +22,17 @@ dropArea.addEventListener('click', (e) => {
     fileInput.click();
 });
 
+// Handle file input change event
+fileInput.addEventListener('change', (e) => {
+    dropArea.innerHTML = '';
+
+    Array.from(fileInput.files).forEach((file, index) => {
+        const fileDiv = document.createElement('div');
+        fileDiv.textContent = `📄 1: ${file.name}`;
+        dropArea.appendChild(fileDiv);
+    });
+});
+
 document.getElementById('createReport').addEventListener('click', async (e) => {
     const formData = new FormData();
     Array.from(fileInput.files).forEach((file, index) => {
