@@ -28,7 +28,7 @@ fileInput.addEventListener('change', (e) => {
 
     Array.from(fileInput.files).forEach((file, index) => {
         const fileDiv = document.createElement('div');
-        fileDiv.textContent = `📄 1: ${file.name}`;
+        fileDiv.textContent = `📄 ${index + 1}: ${file.name}`;
         dropArea.appendChild(fileDiv);
     });
 });
