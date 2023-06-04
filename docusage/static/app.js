@@ -22,11 +22,23 @@ dropArea.addEventListener('click', (e) => {
     fileInput.click();
 });
 
-fileInput.addEventListener('change', (e) => {
-    console.log(fileInput.files);
-});
+document.getElementById('createReport').addEventListener('click', async (e) => {
+    const formData = new FormData();
+    Array.from(fileInput.files).forEach((file, index) => {
+        formData.append("files", file);
+    });
 
-document.getElementById('createReport').addEventListener('click', (e) => {
-    console.log('create report');
-});
+    const response = await fetch('/create_report', {
+        method: 'POST',
+        body: formData,
+    });
 
+    if (!response.ok) {
+        console.error('Report creation failed');
+        return;
+    }
+
+    const report = await response.json();
+    const reportArea = document.getElementById('reportContent');
+    reportArea.textContent = report.content;
+});
