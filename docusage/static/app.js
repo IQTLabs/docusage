@@ -16,8 +16,7 @@ dropArea.addEventListener('dragleave', (e) => {
 
 dropArea.addEventListener('drop', (e) => {
     e.preventDefault();
-    Array.from(e.dataTransfer.files).forEach(file => filesArray.push(file));
-    addFiles(filesArray);
+    addFiles(e.dataTransfer.files);
     dropArea.style.border = '2px dashed #ccc';
 });
 
@@ -28,15 +27,16 @@ dropArea.addEventListener('click', (e) => {
 
 // Handle file input change event
 fileInput.addEventListener('change', (e) => {
-    Array.from(e.target.files).forEach(file => filesArray.push(file));
-    addFiles(filesArray);
+    addFiles(e.target.files);
 });
 
 // Add files to drop area div
 const addFiles = (files) => {
+    Array.from(files).forEach(file => filesArray.push(file));
+
     dropArea.innerHTML = '';
 
-    files.forEach((file, index) => {
+    filesArray.forEach((file, index) => {
         const fileDiv = document.createElement('div');
         fileDiv.textContent = `📄 ${index + 1}: ${file.name}`;
         dropArea.appendChild(fileDiv);
