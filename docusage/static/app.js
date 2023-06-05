@@ -32,7 +32,12 @@ fileInput.addEventListener('change', (e) => {
 
 // Add files to drop area div
 const addFiles = (files) => {
-    Array.from(files).forEach(file => filesArray.push(file));
+    Array.from(files).forEach(file => {
+        // Check if file with the same name already exists in the array
+        if (!filesArray.some(f => f.name === file.name)) {
+            filesArray.push(file);
+        }
+    });
 
     dropArea.innerHTML = '';
 
