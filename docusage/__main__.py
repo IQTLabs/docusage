@@ -43,15 +43,5 @@ def main():
     if prompt:
         print("Mission: ", prompt)
     print("=" * 80)
-    print("INTELLIGENCE REPORT")
-    print("=" * 80)
     result = Mission(files, prompt).write_report_with_sources()
-    print(result["answer"])
-    print("=" * 80)
-    if result.get("sources"):
-        if isinstance(result["sources"], str):
-            result["sources"] = [result["sources"]]
-        print("SOURCES")
-        print("=" * 80)
-        for source in result["sources"]:
-            print(source)
+    print(result)
