@@ -30,6 +30,13 @@ def main():
         help="a list of files to be analyzed",
     )
     parser.add_argument(
+        "--output",
+        "-o",
+        type=str,
+        required=False,
+        help="an optional output file path",
+    )
+    parser.add_argument(
         "--mission", "-m", type=str, required=False, help="an optional mission prompt"
     )
 
@@ -44,4 +51,7 @@ def main():
         print("Mission: ", prompt)
     print("=" * 80)
     result = Mission(files, prompt).write_report_with_sources()
+    if args.output:
+        with open(args.output, "w") as f:
+            f.write(result)
     print(result)
