@@ -49,6 +49,14 @@ const addFiles = (files) => {
 };
 
 document.getElementById('createReport').addEventListener('click', async (e) => {
+    const contentarea = document.getElementById('content');
+    const spinner = document.getElementsByClassName('spinner')[0];
+
+    contentarea.style.filter = 'blur(3px)';
+    contentarea.style.pointerEvents = 'none';
+    spinner.style.display = 'block';
+
+
     const formData = new FormData();
     filesArray.forEach((file, index) => {
         formData.append("files", file);
@@ -61,6 +69,10 @@ document.getElementById('createReport').addEventListener('click', async (e) => {
         method: 'POST',
         body: formData,
     });
+
+    contentarea.style.filter = 'none';
+    contentarea.style.pointerEvents = 'auto';
+    spinner.style.display = 'none';
 
     if (!response.ok) {
         console.error('Report creation failed');
