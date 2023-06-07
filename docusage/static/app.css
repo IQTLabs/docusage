@@ -22,6 +22,7 @@ header {
 
 main {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     padding: 20px;
     height: 80%;
@@ -31,6 +32,14 @@ main {
 #reportArea {
     width: 40%;
     height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+
+    #uploadArea,
+    #reportArea {
+        width: 100%;
+    }
 }
 
 .drag-area {
