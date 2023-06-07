@@ -24,7 +24,7 @@ async def create_report(
             with open(temppath, "wb") as f:
                 f.write(contents)
             await file.close()
-        report_content = Mission(temppaths, mission).write_report()
+        report_content = Mission(temppaths, mission).write_report_with_sources()
 
     return JSONResponse(content={"content": report_content})
 
