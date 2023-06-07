@@ -4,11 +4,11 @@ from langchain.document_loaders import UnstructuredFileLoader
 from langchain.indexes import VectorstoreIndexCreator
 
 questions = [
-    "Provide a comprehensive executive summary covering the main aspects of {}.",
+    "Provide a comprehensive executive summary written for an intelligence report covering the main aspects of {}.",
     "Detail the current landscape of {}, identifying key actors and their roles. Describe the interaction between these key actors.",
     "What are the significant recent developments in {}? Analyze their impact on the overall context.",
-    "Identify and detail the potential risks, challenges, and threats facing {}?",
-    "What are the future projections for {} over the next 5-10 years?",
+    "Identify and detail all potential risks, challenges, and threats facing {}?",
+    "What are the future projections for {} over the next 5-10 years? Answer comprehensively.",
     "Based on the analysis, what recommendations and opportunities can be made for stakeholders in {}?",
 ]
 
