@@ -3,39 +3,21 @@ from langchain.document_loaders import UnstructuredFileLoader
 from langchain.indexes import VectorstoreIndexCreator
 
 questions = [
-    "Please provide a brief overview of {}.",
-    "What are some key historical events or developments related to {}?",
-    "Who are the key figures related to {}?",
-    "What are the major organizations or entities involved in {}?",
-    "What is the current state of affairs in relation to {}?",
-    "What recent developments or events have occurred in {}?",
-    "What are the primary challenges or issues associated with {}?",
-    "What risks or threats are currently present in {}?",
-    "What is the impact of these challenges or risks on the broader context of {}?",
-    "What trends are emerging in relation to {}?",
-    "What are possible future developments or scenarios in {}?",
-    "What factors are contributing to the current situation and possible future trends in {}?",
-    "What implications do these findings have for stakeholders in {}?",
-    "What actions could be taken in response to the identified challenges and trends in {}?",
-    "What opportunities exist in the current scenario of {}?",
+    "Provide a comprehensive executive summary covering the main aspects of {}.",
+    "Detail the current landscape of {}, identifying key actors and their roles. Describe the interaction between these key actors.",
+    "What are the significant recent developments in {}? Analyze their impact on the overall context.",
+    "Identify and detail the potential risks, challenges, and threats facing {}?",
+    "What are the future projections for {} over the next 5-10 years?",
+    "Based on the analysis, what recommendations and opportunities can be made for stakeholders in {}?",
 ]
 
 section_headers = [
     "Executive Summary",
-    "Historical Context",
-    "Key Figures and Entities",
-    "Organizational Landscape",
-    "Current State of Affairs",
-    "Recent Developments",
-    "Challenges and Issues",
-    "Risks and Threats",
-    "Impact of Challenges and Risks",
-    "Emerging Trends",
-    "Forecast and Potential Scenarios",
-    "Contributing Factors and Analysis",
-    "Implications for Stakeholders",
-    "Proposed Actions and Strategies",
-    "Opportunities",
+    "Current Landscape and Key Actors",
+    "Recent Developments and Their Impact",
+    "Potential Risks and Challenges",
+    "Future Projections and Emerging Trends",
+    "Recommendations and Opportunities",
 ]
 
 
