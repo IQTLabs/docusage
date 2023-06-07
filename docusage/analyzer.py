@@ -1,4 +1,5 @@
 from typing import Iterable
+from pathlib import Path
 from langchain.document_loaders import UnstructuredFileLoader
 from langchain.indexes import VectorstoreIndexCreator
 
@@ -48,7 +49,7 @@ class Mission:
                     result["sources"] = [result["sources"]]
                 report += "**Sources**\n\n"
                 for source in result["sources"]:
-                    report += f"- {source}\n"
+                    report += f"- {Path(source).name}\n"
                 report += "\n"
 
         return report
