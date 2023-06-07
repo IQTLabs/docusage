@@ -62,7 +62,7 @@ document.getElementById('createReport').addEventListener('click', async (e) => {
         formData.append("files", file);
     });
     const mission = document.getElementById('missionInput').value;
-    if (mission !== '') {
+    if (mission.trim() !== '') {
         formData.append("mission", mission);
     }
     const response = await fetch('/create_report', {
