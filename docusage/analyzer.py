@@ -31,7 +31,7 @@ class Mission:
     def write_report(self) -> str:
         report = f"## INTELLIGENCE REPORT\n\n"
         for i, question in enumerate(questions):
-            report += f"#### {section_headers[i]}\n\n"
+            report += f"### {section_headers[i]}\n\n"
             report += self.index.query(question.format(self.mission))
             report += "\n\n"
 
@@ -40,14 +40,14 @@ class Mission:
     def write_report_with_sources(self) -> str:
         report = f"## INTELLIGENCE REPORT\n\n"
         for i, question in enumerate(questions):
-            report += f"#### {section_headers[i]}\n\n"
+            report += f"### {section_headers[i]}\n\n"
             result = self.index.query_with_sources(question.format(self.mission))
             report += result["answer"]
             report += "\n\n"
             if result.get("sources"):
                 if isinstance(result["sources"], str):
                     result["sources"] = [result["sources"]]
-                report += "**Sources**\n\n"
+                report += "**References**\n\n"
                 for source in result["sources"]:
                     report += f"- {Path(source).name}\n"
                 report += "\n"
