@@ -2,7 +2,7 @@ import tempfile
 from pathlib import Path
 from typing import List, Optional
 
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -13,7 +13,7 @@ app = FastAPI()
 
 @app.post("/create_report")
 async def create_report(
-    files: List[UploadFile] = File(...), mission: Optional[str] = None
+    files: List[UploadFile] = File(...), mission: Optional[str] = Form(None)
 ):
     with tempfile.TemporaryDirectory() as tempdir:
         temppaths = []
