@@ -23,13 +23,29 @@ section_headers = [
 
 
 class Mission:
-    def __init__(self, docs: Iterable[str], mission: str = "the topic"):
+    def __init__(
+        self,
+        docs: Iterable[str],
+        mission: str = None,
+    ):
         loaders = [UnstructuredFileLoader(path) for path in docs]
         self.index = VectorstoreIndexCreator().from_loaders(loaders)
+        if not mission:
+            mission = self._find_the_mission()
         self.mission = mission
 
+    def _find_the_mission(self) -> str:
+        mission = self.index.query(
+            "What is a identified subject of interest with intelligence value "
+            "to a Western government that is found in these documents? Write the"
+            "answer in six words or less."
+        )
+        if mission.endswith("."):
+            mission = mission[:-1]
+        return mission
+
     def write_report(self) -> str:
-        report = ""
+        report = "INTELLIGENCE REPORT: {}\n\n".format(self.mission)
         for i, question in enumerate(questions):
             report += f"### {section_headers[i]}\n\n"
             report += self.index.query(question.format(self.mission))
@@ -38,7 +54,7 @@ class Mission:
         return report
 
     def write_report_with_sources(self) -> str:
-        report = ""
+        report = "INTELLIGENCE REPORT: {}\n\n".format(self.mission)
         for i, question in enumerate(questions):
             report += f"### {section_headers[i]}\n\n"
             result = self.index.query_with_sources(question.format(self.mission))
