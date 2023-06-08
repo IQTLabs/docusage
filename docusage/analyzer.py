@@ -5,11 +5,11 @@ from langchain.indexes import VectorstoreIndexCreator
 
 questions = [
     "Provide a comprehensive executive summary written for an intelligence report covering the main aspects of {}.",
-    "Detail the current landscape of {}, identifying key actors and their roles. Describe the interaction between these key actors.",
+    "Detail the current landscape of {}, identifying key actors and their roles. Describe the interaction between these key actors. Answer comprehensively.",
     "What are the significant recent developments in {}? Analyze their impact on the overall context.",
-    "Identify and detail all potential risks, challenges, and threats facing {}?",
+    "Identify and detail all potential risks, challenges, and threats facing {}? Answer comprehensively.",
     "What are the future projections for {} over the next 5-10 years? Answer comprehensively.",
-    "Based on the analysis, what recommendations and opportunities can be made for stakeholders in {}?",
+    "Based on the analysis, what recommendations and opportunities can be made for stakeholders in {}? Answer comprehensively.",
 ]
 
 section_headers = [
