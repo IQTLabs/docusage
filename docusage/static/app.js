@@ -92,7 +92,7 @@ document.getElementById('printReport').addEventListener('click', (e) => {
     var reportContent = document.getElementById('reportContent').innerHTML;
 
     // Create a new iframe or find the existing one.
-    var printIframe = document.getElementById('printIframe');
+    let printIframe = document.getElementById('printIframe');
     if (!printIframe) {
         printIframe = document.createElement('iframe');
         printIframe.id = 'printIframe';
@@ -101,10 +101,12 @@ document.getElementById('printReport').addEventListener('click', (e) => {
     }
 
     // Copy the text into the new iframe.
-    var printDocument = printIframe.contentWindow.document;
+    const printDocument = printIframe.contentWindow.document;
     printDocument.open();
-    printDocument.write('<html><head><title>Print</title></head><body>');
-    printDocument.write('<pre>' + reportContent + '</pre>');
+    printDocument.write('<html><head><title>Print</title>');
+    printDocument.write('<style>body { white-space: pre-wrap; word-wrap: break-word; }</style>');
+    printDocument.write('</head><body>');
+    printDocument.write(reportContent);
     printDocument.write('</body></html>');
     printDocument.close();
 
