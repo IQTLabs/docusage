@@ -46,6 +46,8 @@ const addFiles = (files) => {
         fileDiv.textContent = `📄 ${index + 1}: ${file.name}`;
         dropArea.appendChild(fileDiv);
     });
+
+    document.getElementById('createReport').disabled = false;
 };
 
 document.getElementById('createReport').addEventListener('click', async (e) => {
@@ -83,6 +85,7 @@ document.getElementById('createReport').addEventListener('click', async (e) => {
     const reportArea = document.getElementById('reportContent');
     // Convert markdown to HTML
     reportArea.innerHTML = marked.parse(report.content);
+    document.getElementById('printReport').disabled = false;
 });
 
 document.getElementById('printReport').addEventListener('click', (e) => {

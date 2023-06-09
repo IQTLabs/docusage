@@ -32,6 +32,16 @@ button:hover {
     background-color: #205c5a;
 }
 
+button:disabled {
+    background-color: #CCCCCC;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+button:disabled:hover {
+    background-color: #CCCCCC;
+}
+
 /* Specific selectors */
 #logo {
     font-family: 'Lobster', cursive;
