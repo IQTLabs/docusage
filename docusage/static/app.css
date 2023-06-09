@@ -25,16 +25,23 @@ main {
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 20px;
-    height: 80%;
+    height: calc(100% - 50px);
 }
 
 #uploadArea,
 #reportArea {
+    box-sizing: border-box;
     width: 40%;
-    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
 }
 
 @media screen and (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
 
     #uploadArea,
     #reportArea {
@@ -44,18 +51,29 @@ main {
 
 .drag-area {
     border: 2px dashed #ccc;
-    padding: 20px;
+    padding: 10px;
     margin: 10px 0;
     text-align: center;
-    height: 40%;
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
 }
 
 #fileInput {
     display: none;
+}
+
+#missionInput {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
 }
 
 button {
@@ -82,13 +100,8 @@ button:hover {
     overflow-y: scroll;
 }
 
-#missionInput {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-family: Arial, sans-serif;
+#mission {
+    margin-bottom: 20px;
 }
 
 @keyframes spin {
