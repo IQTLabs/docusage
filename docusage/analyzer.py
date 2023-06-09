@@ -9,7 +9,7 @@ questions = [
     "What are the significant recent developments in {}? Analyze their impact on the overall context.",
     "Identify and detail all potential risks, challenges, and threats facing {}? Answer comprehensively.",
     "What are the future projections for {} over the next 5-10 years? Answer comprehensively.",
-    "Based on the analysis, what recommendations and opportunities can be made for stakeholders in {}? Answer comprehensively.",
+    "Based on the analysis, what recommendations and opportunities can be made for for the United States national security establishment to address {}? Answer comprehensively.",
 ]
 
 section_headers = [
