@@ -84,3 +84,27 @@ document.getElementById('createReport').addEventListener('click', async (e) => {
     // Convert markdown to HTML
     reportArea.innerHTML = marked.parse(report.content);
 });
+
+document.getElementById('printReport').addEventListener('click', (e) => {
+    var reportContent = document.getElementById('reportContent').innerHTML;
+
+    // Create a new iframe or find the existing one.
+    var printIframe = document.getElementById('printIframe');
+    if (!printIframe) {
+        printIframe = document.createElement('iframe');
+        printIframe.id = 'printIframe';
+        printIframe.style.display = 'none';
+        document.body.appendChild(printIframe);
+    }
+
+    // Copy the text into the new iframe.
+    var printDocument = printIframe.contentWindow.document;
+    printDocument.open();
+    printDocument.write('<html><head><title>Print</title></head><body>');
+    printDocument.write('<pre>' + reportContent + '</pre>');
+    printDocument.write('</body></html>');
+    printDocument.close();
+
+    // Call the print function on the iframe.
+    printIframe.contentWindow.print();
+});
