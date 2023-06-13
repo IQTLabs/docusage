@@ -2,6 +2,7 @@ from typing import Iterable
 from pathlib import Path
 from langchain.document_loaders import UnstructuredFileLoader
 from langchain.indexes import VectorstoreIndexCreator
+from langchain.llms import OpenAI, HuggingFaceHub
 
 questions = [
     "Provide a comprehensive executive summary written for an intelligence report covering the main aspects of {}.",
@@ -27,12 +28,19 @@ class Mission:
         self,
         docs: Iterable[str],
         mission: str = None,
+        llm: str = "openai",
     ):
         loaders = [UnstructuredFileLoader(path) for path in docs]
         self.index = VectorstoreIndexCreator().from_loaders(loaders)
         if not mission:
             mission = self._find_the_mission()
         self.mission = mission
+        if llm == "openai":
+            self.llm = OpenAI(max_tokens=1024, temperature=0)
+        else:
+            self.llm = HuggingFaceHub(
+                repo_id=llm, model_kwargs={"temperature": 0, "max_length": 1024}
+            )
 
     def _find_the_mission(self) -> str:
         mission = self.index.query(
@@ -48,7 +56,7 @@ class Mission:
         report = "INTELLIGENCE REPORT: {}\n\n".format(self.mission)
         for i, question in enumerate(questions):
             report += f"### {section_headers[i]}\n\n"
-            report += self.index.query(question.format(self.mission))
+            report += self.index.query(question.format(self.mission), llm=self.llm)
             report += "\n\n"
 
         return report
@@ -57,7 +65,9 @@ class Mission:
         report = "INTELLIGENCE REPORT: {}\n\n".format(self.mission)
         for i, question in enumerate(questions):
             report += f"### {section_headers[i]}\n\n"
-            result = self.index.query_with_sources(question.format(self.mission))
+            result = self.index.query_with_sources(
+                question.format(self.mission), llm=self.llm
+            )
             report += result["answer"]
             report += "\n\n"
             if result.get("sources"):

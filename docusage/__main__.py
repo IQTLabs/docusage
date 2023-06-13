@@ -39,18 +39,34 @@ def main():
     parser.add_argument(
         "--mission", "-m", type=str, required=False, help="an optional mission prompt"
     )
+    parser.add_argument(
+        "--llm",
+        "-l",
+        type=str,
+        required=False,
+        default="openai",
+        help="the language model to use",
+    )
 
     args = parser.parse_args()
 
     files = args.files
     prompt = args.mission
+    llm = args.llm
+
+    if args.llm != "openai":
+        if not os.environ.get("HUGGINGFACEHUB_API_TOKEN"):
+            raise ValueError(
+                "The environment variable HUGGINGFACE_API_KEY is not set. "
+                "You must have a HuggingFace account to use DocuSage with a custom LLM."
+            )
 
     print(LOGO)
     print("Analyzing documents: ", files)
     if prompt:
         print("Mission: ", prompt)
     print("=" * 80)
-    result = Mission(files, prompt).write_report_with_sources()
+    result = Mission(files, prompt, llm).write_report_with_sources()
     if args.output:
         with open(args.output, "w") as f:
             f.write(result)
