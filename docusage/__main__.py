@@ -62,7 +62,7 @@ def main():
     if args.mission:
         print("Mission: ", args.prompt)
     print("=" * 80)
-    result = Mission(args.files, args.prompt, args.llm).write_report_with_sources()
+    result = Mission(args.files, args.mission, args.llm).write_report_with_sources()
     if args.output:
         with open(args.output, "w") as f:
             f.write(result)
