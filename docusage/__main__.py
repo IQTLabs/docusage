@@ -59,7 +59,7 @@ def main():
 
     print(LOGO)
     print("Analyzing documents: ", args.files)
-    if args.prompt:
+    if args.mission:
         print("Mission: ", args.prompt)
     print("=" * 80)
     result = Mission(args.files, args.prompt, args.llm).write_report_with_sources()
