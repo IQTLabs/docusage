@@ -50,10 +50,6 @@ def main():
 
     args = parser.parse_args()
 
-    files = args.files
-    prompt = args.mission
-    llm = args.llm
-
     if args.llm != "openai":
         if not os.environ.get("HUGGINGFACEHUB_API_TOKEN"):
             raise ValueError(
@@ -62,11 +58,11 @@ def main():
             )
 
     print(LOGO)
-    print("Analyzing documents: ", files)
-    if prompt:
-        print("Mission: ", prompt)
+    print("Analyzing documents: ", args.files)
+    if args.prompt:
+        print("Mission: ", args.prompt)
     print("=" * 80)
-    result = Mission(files, prompt, llm).write_report_with_sources()
+    result = Mission(args.files, args.prompt, args.llm).write_report_with_sources()
     if args.output:
         with open(args.output, "w") as f:
             f.write(result)
