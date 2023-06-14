@@ -36,10 +36,10 @@ class Mission:
             mission = self._find_the_mission()
         self.mission = mission
         if llm == "openai":
-            self.llm = OpenAI(max_tokens=1024, temperature=0)
+            self.llm = OpenAI(max_tokens=500, temperature=0)
         else:
             self.llm = HuggingFaceHub(
-                repo_id=llm, model_kwargs={"temperature": 0, "max_length": 1024}
+                repo_id=llm, model_kwargs={"temperature": 0, "max_length": 500}
             )
 
     def _find_the_mission(self) -> str:
@@ -65,9 +65,7 @@ class Mission:
         report = "INTELLIGENCE REPORT: {}\n\n".format(self.mission)
         for i, question in enumerate(questions):
             report += f"### {section_headers[i]}\n\n"
-            result = self.index.query_with_sources(
-                question.format(self.mission), llm=self.llm
-            )
+            result = self.index.query_with_sources(question.format(self.mission))
             report += result["answer"]
             report += "\n\n"
             if result.get("sources"):
