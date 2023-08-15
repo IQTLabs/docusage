@@ -74,6 +74,12 @@ class Mission:
             report += f"### {section_headers[i]}\n\n"
             response = self.index.query(question.format(self.mission))
             report += response.answer
+            if (
+                "I cannot answer" in response.answer
+                or "I can't answer" in response.answer
+            ):
+                report += "\n\n"
+                continue
             report += "\n\n"
             report += "**References**\n\n"
             report += response.references
