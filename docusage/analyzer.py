@@ -55,6 +55,8 @@ class Mission:
         mission = response.answer
         if mission.endswith("."):
             mission = mission[:-1]
+        if mission == "None":
+            raise ValueError("No overall mission purpose was found in the documents.")
         return mission
 
     def write_report(self) -> str:
