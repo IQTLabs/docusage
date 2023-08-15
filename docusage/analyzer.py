@@ -1,5 +1,6 @@
 from typing import Iterable
 from pathlib import Path
+from paperqa import Docs
 from langchain.document_loaders import UnstructuredFileLoader
 from langchain.indexes import VectorstoreIndexCreator
 from langchain.llms import OpenAI, HuggingFaceHub
@@ -30,24 +31,28 @@ class Mission:
         mission: str = None,
         llm: str = "openai",
     ):
-        loaders = [UnstructuredFileLoader(path) for path in docs]
-        self.index = VectorstoreIndexCreator().from_loaders(loaders)
-        if not mission:
-            mission = self._find_the_mission()
-        self.mission = mission
         if llm == "openai":
-            self.llm = OpenAI(max_tokens=500, temperature=0)
+            llm = OpenAI(max_tokens=500, temperature=0)
         else:
-            self.llm = HuggingFaceHub(
+            llm = HuggingFaceHub(
                 repo_id=llm, model_kwargs={"temperature": 0, "max_length": 500}
             )
 
+        self.index = Docs()
+        for doc in docs:
+            self.index.add(doc)
+
+        self.mission = mission
+        if not mission:
+            mission = self._find_the_mission()
+
     def _find_the_mission(self) -> str:
-        mission = self.index.query(
+        response = self.index.query(
             "What is a identified subject of interest with intelligence value "
-            "to a Western government that is found in these documents? Write the"
-            "answer in six words or less."
+            "to a Western government that is found in these documents?",
+            length_prompt="six words or less",
         )
+        mission = response.answer
         if mission.endswith("."):
             mission = mission[:-1]
         return mission
@@ -65,15 +70,13 @@ class Mission:
         report = "INTELLIGENCE REPORT: {}\n\n".format(self.mission)
         for i, question in enumerate(questions):
             report += f"### {section_headers[i]}\n\n"
-            result = self.index.query_with_sources(question.format(self.mission))
-            report += result["answer"]
+            response = self.index.query(question.format(self.mission))
+            report += response.answer
             report += "\n\n"
-            if result.get("sources"):
-                if isinstance(result["sources"], str):
-                    result["sources"] = [result["sources"]]
-                report += "**References**\n\n"
-                for source in result["sources"]:
-                    report += f"- {Path(source).name}\n"
-                report += "\n"
+            report += "**References**\n\n"
+            report += response.references
+            report += "\n\n"
+            report += "**Context**\n\n"
+            report += response.context
 
         return report
