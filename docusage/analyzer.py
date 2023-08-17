@@ -71,20 +71,21 @@ class Mission:
     def write_report_with_sources(self) -> str:
         report = "INTELLIGENCE REPORT: {}\n\n".format(self.mission)
         for i, question in enumerate(questions):
-            report += f"### {section_headers[i]}\n\n"
             response = self.index.query(question.format(self.mission))
-            report += response.answer
             if (
                 "I cannot answer" in response.answer
                 or "I can't answer" in response.answer
             ):
                 report += "\n\n"
                 continue
+            report += f"### {section_headers[i]}\n\n"
+            report += response.answer
             report += "\n\n"
             report += "**References**\n\n"
             report += response.references
             report += "\n\n"
             report += "**Context**\n\n"
             report += response.context
+            report += "\n\n"
 
         return report
