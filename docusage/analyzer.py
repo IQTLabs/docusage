@@ -23,6 +23,14 @@ section_headers = [
     "Recommendations and Opportunities",
 ]
 
+length_prompts = {
+    "tiny": "no more than one sentence",
+    "small": "no more than one paragraph",
+    "medium": "two paragraphs",
+    "large": "three to five paragraphs",
+    "xlarge": "five paragraphs or more",
+}
+
 
 class Mission:
     def __init__(
@@ -60,11 +68,16 @@ class Mission:
         return mission
 
     def write_report(
-        self, inline_context: bool = False, inline_refs: bool = False
+        self,
+        inline_context: bool = False,
+        inline_refs: bool = False,
+        length: str = "medium",
     ) -> str:
         report = "INTELLIGENCE REPORT: {}\n\n".format(self.mission)
         for i, question in enumerate(questions):
-            response = self.index.query(question.format(self.mission))
+            response = self.index.query(
+                question.format(self.mission), length_prompt=length_prompts[length]
+            )
             if (
                 "I cannot answer" in response.answer
                 or "I can't answer" in response.answer
