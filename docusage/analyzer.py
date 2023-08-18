@@ -50,9 +50,10 @@ class Mission:
         for doc in docs:
             self.index.add(doc)
 
-        self.mission = mission
         if not mission:
-            mission = self._find_the_mission()
+            self.mission = self._find_the_mission()
+        else:
+            self.mission = mission
 
     def _find_the_mission(self) -> str:
         response = self.index.query(
