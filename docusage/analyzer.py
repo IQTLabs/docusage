@@ -58,8 +58,8 @@ class Mission:
     def _find_the_mission(self) -> str:
         response = self.index.query(
             "What is a identified subject of interest with intelligence value "
-            "to a Western government that is found in these documents?",
-            length_prompt="six words or less",
+            "to a Western government that is found in these documents? Respond in six words or less.",
+            length_prompt="strictly six words or less",
         )
         mission = response.answer
         if mission.endswith("."):
