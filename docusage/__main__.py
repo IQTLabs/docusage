@@ -79,10 +79,10 @@ def main():
             )
 
     print(LOGO)
-    print("Analyzing documents: ", args.files)
+    print("Analyzing documents:", args.files)
     if args.mission:
-        print("Mission: ", args.mission)
-    print("Report length: ", args.length)
+        print("Mission:", args.mission)
+    print("Report length:", args.length)
     args.inline_context and print("Including context in report.")
     args.inline_references and print("Including references in report.")
     print("=" * 80)
