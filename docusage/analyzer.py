@@ -59,15 +59,6 @@ class Mission:
             raise ValueError("No overall mission purpose was found in the documents.")
         return mission
 
-    def write_report(self) -> str:
-        report = "INTELLIGENCE REPORT: {}\n\n".format(self.mission)
-        for i, question in enumerate(questions):
-            report += f"### {section_headers[i]}\n\n"
-            report += self.index.query(question.format(self.mission), llm=self.llm)
-            report += "\n\n"
-
-        return report
-
     def write_report_with_sources(
         self, inline_context: bool = False, inline_refs: bool = False
     ) -> str:
