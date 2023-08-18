@@ -48,16 +48,18 @@ def main():
         help="the language model to use",
     )
     parser.add_argument(
-        "--inline-references",
+        "--no-inline-references",
         "-r",
-        action="store_true",
-        help="include references in the report",
+        action="store_false",
+        default=True,
+        help="don't include references in the report",
     )
     parser.add_argument(
-        "--inline-context",
+        "--no-inline-context",
         "-c",
-        action="store_true",
-        help="include context from the source material in the report",
+        action="store_false",
+        default=True,
+        help="don't include context from the source material in the report",
     )
     parser.add_argument(
         "--length",
@@ -83,11 +85,11 @@ def main():
     mission = Mission(args.files, args.mission, args.llm)
     print("Mission:", mission.mission)
     print("Report length:", args.length)
-    args.inline_context and print("Including context in report.")
-    args.inline_references and print("Including references in report.")
+    args.no_inline_context and print("Including context in report.")
+    args.no_inline_references and print("Including references in report.")
     print("=" * 80)
     result = mission.write_report(
-        args.inline_context, args.inline_references, args.length
+        args.no_inline_context, args.no_inline_references, args.length
     )
     if args.output:
         with open(args.output, "w") as f:
