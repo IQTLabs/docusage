@@ -59,6 +59,15 @@ def main():
         action="store_true",
         help="include context from the source material in the report",
     )
+    parser.add_argument(
+        "--length",
+        "-n",
+        type=str,
+        required=False,
+        default="medium",
+        choices=["tiny", "small", "medium", "large", "xlarge"],
+        help="the length of the report",
+    )
 
     args = parser.parse_args()
 
@@ -73,9 +82,12 @@ def main():
     print("Analyzing documents: ", args.files)
     if args.mission:
         print("Mission: ", args.mission)
+    print("Report length: ", args.length)
+    args.inline_context and print("Including context in report.")
+    args.inline_references and print("Including references in report.")
     print("=" * 80)
     result = Mission(args.files, args.mission, args.llm).write_report(
-        args.inline_context, args.inline_references
+        args.inline_context, args.inline_references, args.length
     )
     if args.output:
         with open(args.output, "w") as f:
