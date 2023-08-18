@@ -74,7 +74,7 @@ def main():
     if args.mission:
         print("Mission: ", args.mission)
     print("=" * 80)
-    result = Mission(args.files, args.mission, args.llm).write_report_with_sources(
+    result = Mission(args.files, args.mission, args.llm).write_report(
         args.inline_context, args.inline_references
     )
     if args.output:

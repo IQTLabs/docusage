@@ -59,7 +59,7 @@ class Mission:
             raise ValueError("No overall mission purpose was found in the documents.")
         return mission
 
-    def write_report_with_sources(
+    def write_report(
         self, inline_context: bool = False, inline_refs: bool = False
     ) -> str:
         report = "INTELLIGENCE REPORT: {}\n\n".format(self.mission)
