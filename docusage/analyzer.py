@@ -63,7 +63,7 @@ class Mission:
         mission = response.answer
         if mission.endswith("."):
             mission = mission[:-1]
-        if mission == "None" or mission == None:
+        if "I cannot answer" in mission or "I can't answer" in mission:
             raise ValueError("No overall mission purpose was found in the documents.")
         return mission
 
