@@ -55,7 +55,7 @@ class Mission:
         mission = response.answer
         if mission.endswith("."):
             mission = mission[:-1]
-        if mission == "None":
+        if mission == "None" or mission == None:
             raise ValueError("No overall mission purpose was found in the documents.")
         return mission
 
@@ -68,7 +68,9 @@ class Mission:
 
         return report
 
-    def write_report_with_sources(self) -> str:
+    def write_report_with_sources(
+        self, inline_context: bool = False, inline_refs: bool = False
+    ) -> str:
         report = "INTELLIGENCE REPORT: {}\n\n".format(self.mission)
         for i, question in enumerate(questions):
             response = self.index.query(question.format(self.mission))
@@ -81,11 +83,15 @@ class Mission:
             report += f"### {section_headers[i]}\n\n"
             report += response.answer
             report += "\n\n"
-            report += "**References**\n\n"
-            report += response.references
-            report += "\n\n"
-            report += "**Context**\n\n"
-            report += response.context
+            if inline_refs:
+                report += "**References**\n\n"
+                report += response.references
+                report += "\n\n"
+            if inline_context:
+                report += "**Context**\n\n"
+                for context in response.contexts:
+                    report += f"* {context.text.text} (Score: {context.score})\n"
+                report += "\n\n"
             report += "\n\n"
 
         return report
