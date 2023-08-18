@@ -6,12 +6,12 @@ from langchain.indexes import VectorstoreIndexCreator
 from langchain.llms import OpenAI, HuggingFaceHub
 
 questions = [
-    "Provide a comprehensive executive summary written for an intelligence report covering the main aspects of {}.",
-    "Detail the current landscape of {}, identifying key actors and their roles. Describe the interaction between these key actors. Answer comprehensively.",
+    "Provide a executive summary written for an intelligence report covering the main aspects of {}.",
+    "Detail the current landscape of {}, identifying key actors and their roles. Describe the interaction between these key actors.",
     "What are the significant recent developments in {}? Analyze their impact on the overall context.",
-    "Identify and detail all potential risks, challenges, and threats facing {}? Answer comprehensively.",
-    "What are the future projections for {} over the next 5-10 years? Answer comprehensively.",
-    "Based on the analysis, what recommendations and opportunities can be made for for the United States national security establishment to address {}? Answer comprehensively.",
+    "Identify and detail all potential risks, challenges, and threats facing {}?",
+    "What are the future projections for {} over the next 5-10 years?",
+    "Based on the analysis, what recommendations and opportunities can be made for for the United States national security establishment to address {}?",
 ]
 
 section_headers = [
