@@ -47,6 +47,18 @@ def main():
         default="openai",
         help="the language model to use",
     )
+    parser.add_argument(
+        "--inline-references",
+        "-r",
+        action="store_true",
+        help="include references in the report",
+    )
+    parser.add_argument(
+        "--inline-context",
+        "-c",
+        action="store_true",
+        help="include context from the source material in the report",
+    )
 
     args = parser.parse_args()
 
@@ -62,7 +74,9 @@ def main():
     if args.mission:
         print("Mission: ", args.mission)
     print("=" * 80)
-    result = Mission(args.files, args.mission, args.llm).write_report_with_sources()
+    result = Mission(args.files, args.mission, args.llm).write_report_with_sources(
+        args.inline_context, args.inline_references
+    )
     if args.output:
         with open(args.output, "w") as f:
             f.write(result)
