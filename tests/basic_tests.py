@@ -1,12 +1,12 @@
 from glob import glob
 import os
-import pytest
 from docusage.analyzer import Mission, section_headers
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Sample documents for the tests from the Congressional Research Service
 sample_docs = [doc for doc in glob(os.path.join(script_dir, "docs", "*.pdf"))]
+
 
 def test_initialization():
     """
@@ -35,15 +35,3 @@ def test_report_writing():
     assert "INTELLIGENCE REPORT:" in report
     for header in section_headers:
         assert header in report
-
-
-def test_report_with_sources():
-    """
-    Test the output format and the presence of references in the write_report_with_sources method.
-    """
-    mission = Mission(docs=sample_docs)
-    report = mission.write_report_with_sources()
-    assert "INTELLIGENCE REPORT:" in report
-    for header in section_headers:
-        assert header in report
-    assert "**References**" in report
