@@ -1,38 +1,37 @@
-from typing import Iterable
-from pathlib import Path
+from typing import Iterable, List, Dict
 from paperqa import Docs
 from langchain.document_loaders import UnstructuredFileLoader
 from langchain.indexes import VectorstoreIndexCreator
 from langchain.llms import OpenAI, HuggingFaceHub
 
-questions = [
-    "Provide a executive summary written for an intelligence report covering the main aspects of {}.",
-    "Detail the current landscape of {}, identifying key actors and their roles. Describe the interaction between these key actors.",
-    "What are the significant recent developments in {}? Analyze their impact on the overall context.",
-    "Identify and detail all potential risks, challenges, and threats facing {}?",
-    "What are the future projections for {} over the next 5-10 years?",
-    "Based on the analysis, what recommendations and opportunities can be made for for the United States national security establishment to address {}?",
-]
-
-section_headers = [
-    "Executive Summary",
-    "Current Landscape and Key Actors",
-    "Recent Developments and Their Impact",
-    "Potential Risks and Challenges",
-    "Future Projections and Emerging Trends",
-    "Recommendations and Opportunities",
-]
-
-length_prompts = {
-    "tiny": "no more than one sentence",
-    "small": "no more than one paragraph",
-    "medium": "two paragraphs",
-    "large": "three to five paragraphs",
-    "xlarge": "five paragraphs or more",
-}
-
 
 class Mission:
+    questions: List[str] = [
+        "Provide a executive summary written for an intelligence report covering the main aspects of {}.",
+        "Detail the current landscape of {}, identifying key actors and their roles. Describe the interaction between these key actors.",
+        "What are the significant recent developments in {}? Analyze their impact on the overall context.",
+        "Identify and detail all potential risks, challenges, and threats facing {}?",
+        "What are the future projections for {} over the next 5-10 years?",
+        "Based on the analysis, what recommendations and opportunities can be made for for the United States national security establishment to address {}?",
+    ]
+
+    section_headers: List[str] = [
+        "Executive Summary",
+        "Current Landscape and Key Actors",
+        "Recent Developments and Their Impact",
+        "Potential Risks and Challenges",
+        "Future Projections and Emerging Trends",
+        "Recommendations and Opportunities",
+    ]
+
+    length_prompts: Dict[str, str] = {
+        "tiny": "no more than one sentence",
+        "small": "no more than one paragraph",
+        "medium": "two paragraphs",
+        "large": "three to five paragraphs",
+        "xlarge": "five paragraphs or more",
+    }
+
     def __init__(
         self,
         docs: Iterable[str],
@@ -76,9 +75,9 @@ class Mission:
         length: str = "medium",
     ) -> str:
         report = "INTELLIGENCE REPORT: {}\n\n".format(self.mission)
-        for i, question in enumerate(questions):
+        for i, question in enumerate(self.questions):
             response = self.index.query(
-                question.format(self.mission), length_prompt=length_prompts[length]
+                question.format(self.mission), length_prompt=self.length_prompts[length]
             )
             if (
                 "I cannot answer" in response.answer
@@ -86,7 +85,7 @@ class Mission:
             ):
                 report += "\n\n"
                 continue
-            report += f"### {section_headers[i]}\n\n"
+            report += f"### {self.section_headers[i]}\n\n"
             report += response.answer
             report += "\n\n"
             if inline_refs:
