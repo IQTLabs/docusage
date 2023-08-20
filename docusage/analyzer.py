@@ -59,9 +59,9 @@ class Mission:
             length_prompt="strictly six words or less",
         )
         mission = response.answer
+        mission = mission.split("(")[0].strip()
         if mission.endswith("."):
             mission = mission[:-1]
-        mission = mission.split("(")[0].strip()
         if "I cannot answer" in mission or "I can't answer" in mission:
             raise ValueError("No overall mission purpose was found in the documents.")
         return mission
