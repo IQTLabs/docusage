@@ -1,7 +1,5 @@
 from typing import Iterable, List, Dict
 from paperqa import Docs
-from langchain.document_loaders import UnstructuredFileLoader
-from langchain.indexes import VectorstoreIndexCreator
 from langchain.llms import OpenAI, HuggingFaceHub
 
 
