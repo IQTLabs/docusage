@@ -35,6 +35,7 @@ class Mission:
         docs: Iterable[str],
         mission: str = None,
         llm: str = "openai",
+        use_dynamic_section_headers: bool = False,
     ):
         if llm == "openai":
             llm = OpenAI(max_tokens=500, temperature=0)
@@ -52,6 +53,9 @@ class Mission:
         else:
             self.mission = mission
 
+        if use_dynamic_section_headers:
+            self._create_dynamic_section_headers()
+
     def _find_the_mission(self) -> str:
         response = self.index.query(
             "What is a identified subject of interest with intelligence value "
@@ -65,6 +69,30 @@ class Mission:
         if "I cannot answer" in mission or "I can't answer" in mission:
             raise ValueError("No overall mission purpose was found in the documents.")
         return mission
+
+    def _create_dynamic_section_headers(self):
+        questions = []
+        response = self.index.query(
+            f"Write a list of possible headers for an intelligence report on {self.mission} for "
+            "a Western government in Python list format. For example, but don't copy this "
+            'exactly: ["Executive Summary","Current Landscape and Key Actors","Recent '
+            'Developments and Their Impact", "Potential Risks and Challenges", "Future '
+            'Projections and Emerging Trends","Recommendations and Opportunities"]',
+        )
+        headers = response.answer
+        if "I cannot answer" in headers or "I can't answer" in headers:
+            raise ValueError("No headers were able to be generated from the documents.")
+
+        headers = headers.split("(")[0].strip()
+        headers = headers.replace("[", "").replace("]", "").replace('"', "").split(",")
+        headers = [header.strip() for header in headers]
+
+        for header in headers:
+            questions.append(
+                f"Provide a {header} written for an intelligence report covering the main aspects of {self.mission}."
+            )
+        self.questions = questions
+        self.section_headers = headers
 
     def write_report(
         self,
