@@ -70,6 +70,13 @@ def main():
         choices=["tiny", "small", "medium", "large", "xlarge"],
         help="the length of the report",
     )
+    parser.add_argument(
+        "--use-dynamic-sections",
+        "-d",
+        action="store_true",
+        default=False,
+        help="use the LLM to generate section headers for the report",
+    )
 
     args = parser.parse_args()
 
@@ -82,8 +89,9 @@ def main():
 
     print(LOGO)
     print("Analyzing documents:", args.files)
-    mission = Mission(args.files, args.mission, args.llm)
+    mission = Mission(args.files, args.mission, args.llm, args.use_dynamic_sections)
     print("Mission:", mission.mission)
+    print("Sections:", mission.section_headers)
     print("Report length:", args.length)
     args.no_inline_context and print("Including context in report.")
     args.no_inline_references and print("Including references in report.")
