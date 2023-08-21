@@ -16,6 +16,20 @@
             <div id="mission">
                 <h2>What is your mission? (Optional)</h2>
                 <input type="text" id="missionInput" placeholder="Enter your mission here...">
+                <div id="dynamic_section_headers">
+                    <input type="checkbox" id="dynamicCheckbox" name="dynamicSectionHeader">
+                    <label for="dynamicCheckbox">Include dynamically generated section headers</label>
+                </div>
+            </div>
+            <div id="report_size">
+                <h2>Report Length</h2>
+                <select name="size" id="sizeSelect">
+                    <option value="tiny">Tiny</option>
+                    <option value="small">Small</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="large">Large</option>
+                    <option value="xlarge">XLarge</option>
+                </select>
             </div>
             <h2>Upload Documents</h2>
             <div id="dragDropArea" class="drag-area">

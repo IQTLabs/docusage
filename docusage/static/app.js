@@ -67,6 +67,15 @@ document.getElementById('createReport').addEventListener('click', async (e) => {
     if (mission.trim() !== '') {
         formData.append("mission", mission);
     }
+    const reportSize = document.getElementById('sizeSelect').value;
+    formData.append("reportSize", reportSize);
+
+    const dynamicHeadersCheckbox = document.getElementById('dynamicCheckbox');
+    if (dynamicHeadersCheckbox.checked) {
+        formData.append("dynamicHeaders", "true");
+    } else {
+        formData.append("dynamicHeaders", "false");
+    }
     const response = await fetch('/create_report', {
         method: 'POST',
         body: formData,
