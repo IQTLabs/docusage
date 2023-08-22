@@ -16,6 +16,7 @@ tiktoken = "^0.4"
 fastapi = "^0.95"
 python-multipart = "^0.0"
 paper-qa = "^3.7.0"
+nest-asyncio = "^1.5.7"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
