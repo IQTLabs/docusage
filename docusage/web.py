@@ -13,7 +13,10 @@ app = FastAPI()
 
 @app.post("/create_report")
 async def create_report(
-    files: List[UploadFile] = File(...), mission: Optional[str] = Form(None)
+    files: List[UploadFile] = File(...),
+    mission: Optional[str] = Form(None),
+    reportSize: str = Form(...),
+    dynamicHeaders: Optional[bool] = Form(False),
 ):
     with tempfile.TemporaryDirectory() as tempdir:
         temppaths = []
@@ -24,7 +27,10 @@ async def create_report(
             with open(temppath, "wb") as f:
                 f.write(contents)
             await file.close()
-        report_content = Mission(temppaths, mission).write_report()
+        mission_reporter = Mission(
+            temppaths, mission, use_dynamic_section_headers=dynamicHeaders
+        )
+        report_content = mission_reporter.write_report(length=reportSize)
 
     return JSONResponse(content={"content": report_content})
 
