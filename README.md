@@ -39,14 +39,15 @@ After running this command, DocuSage will process the provided files and display
 To start DocuSage using [Uvicorn](https://www.uvicorn.org), use the following command:
 
 ```bash
-uvicorn docusage.web:app
+uvicorn docusage.web:app --loop asyncio
 ```
 
 By default, this will start the server on 127.0.0.1 (localhost) on port 8000. If you wish to change the host or port, use the --host and --port arguments like so:
 
 ```bash
-uvicorn docusage.web:app --host 0.0.0.0 --port 8080
+uvicorn docusage.web:app --host 0.0.0.0 --port 8080 --loop asyncio
 ```
+The default event loop (uvloop) in uvicorn is not currently supported.
 
 For a production environment, it's recommended to run Uvicorn behind an HTTP proxy server such as Nginx and to use a Uvicorn worker with Gunicorn. For example:
 
