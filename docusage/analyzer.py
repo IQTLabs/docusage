@@ -89,7 +89,13 @@ class Mission:
             raise ValueError("No headers were able to be generated from the documents.")
 
         headers = headers.split("(")[0].strip()
-        headers = headers.replace("[", "").replace("]", "").replace('"', "").split(",")
+        headers = (
+            headers.replace("[", "")
+            .replace("]", "")
+            .replace('"', "")
+            .replace("'", "")
+            .split(",")
+        )
         headers = [header.strip() for header in headers]
 
         for header in headers:
