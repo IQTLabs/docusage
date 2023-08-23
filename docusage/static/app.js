@@ -86,7 +86,7 @@ document.getElementById('createReport').addEventListener('click', async (e) => {
     spinner.style.display = 'none';
 
     if (!response.ok) {
-        console.error('Report creation failed');
+        alert('Report creation failed for an unknown reason.');
         return;
     }
 
