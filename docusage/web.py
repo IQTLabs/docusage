@@ -27,10 +27,9 @@ async def create_report(
             with open(temppath, "wb") as f:
                 f.write(contents)
             await file.close()
-        mission_reporter = await Mission.create(
-            temppaths, mission, use_dynamic_section_headers=dynamicHeaders
+        report_content = await mission_reporter.write_report(
+            length=reportSize, inline_context=True, inline_refs=True
         )
-        report_content = await mission_reporter.write_report(length=reportSize)
 
     return JSONResponse(content={"content": report_content})
 
