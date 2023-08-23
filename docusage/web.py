@@ -34,7 +34,7 @@ async def create_report(
         except ValueError as e:
             return JSONResponse(content={"error": str(e)})
         report_content = await mission_reporter.write_report(
-            length=reportSize, inline_context=True, inline_refs=True
+            length=reportSize, inline_context=False, inline_refs=True
         )
 
     return JSONResponse(content={"content": report_content})
