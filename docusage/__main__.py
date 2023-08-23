@@ -1,5 +1,6 @@
-import os
 import argparse
+import asyncio
+import os
 
 from docusage.analyzer import Mission
 
@@ -12,7 +13,7 @@ LOGO = r"""
     """
 
 
-def main():
+async def async_main():
     if not os.environ.get("OPENAI_API_KEY"):
         raise ValueError(
             "The environment variable OPENAI_API_KEY is not set. You must have a paid OpenAI account to use DocuSage."
@@ -89,17 +90,23 @@ def main():
 
     print(LOGO)
     print("Analyzing documents:", args.files)
-    mission = Mission(args.files, args.mission, args.llm, args.use_dynamic_sections)
+    mission = await Mission.create(
+        args.files, args.mission, args.llm, args.use_dynamic_sections
+    )
     print("Mission:", mission.mission)
     print("Sections:", mission.section_headers)
     print("Report length:", args.length)
     args.no_inline_context and print("Including context in report.")
     args.no_inline_references and print("Including references in report.")
     print("=" * 80)
-    result = mission.write_report(
+    result = await mission.write_report(
         args.no_inline_context, args.no_inline_references, args.length
     )
     if args.output:
         with open(args.output, "w") as f:
             f.write(result)
     print(result)
+
+
+def main():
+    asyncio.run(async_main())

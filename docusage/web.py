@@ -5,7 +5,6 @@ from typing import List, Optional
 from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
-import nest_asyncio
 
 from docusage.analyzer import Mission
 
@@ -28,18 +27,12 @@ async def create_report(
             with open(temppath, "wb") as f:
                 f.write(contents)
             await file.close()
-        mission_reporter = Mission(
+        mission_reporter = await Mission.create(
             temppaths, mission, use_dynamic_section_headers=dynamicHeaders
         )
-        report_content = mission_reporter.write_report(length=reportSize)
+        report_content = await mission_reporter.write_report(length=reportSize)
 
     return JSONResponse(content={"content": report_content})
-
-
-@app.on_event("startup")
-async def startup():
-    # Paper-QA eats up the event loop, so we need to use nest_asyncio to get around this.
-    nest_asyncio.apply()
 
 
 app.mount(

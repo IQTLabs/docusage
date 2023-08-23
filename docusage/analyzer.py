@@ -33,9 +33,7 @@ class Mission:
     def __init__(
         self,
         docs: Iterable[str],
-        mission: str = None,
         llm: str = "openai",
-        use_dynamic_section_headers: bool = False,
     ):
         if llm == "openai":
             llm = OpenAI(max_tokens=500, temperature=0)
@@ -43,21 +41,26 @@ class Mission:
             llm = HuggingFaceHub(
                 repo_id=llm, model_kwargs={"temperature": 0, "max_length": 500}
             )
-
-        self.index = Docs()
+        self.index = Docs(llm=llm)
         for doc in docs:
             self.index.add(doc)
 
-        if not mission:
-            self.mission = self._find_the_mission()
-        else:
-            self.mission = mission
-
+    @classmethod
+    async def create(
+        cls,
+        docs: Iterable[str],
+        mission: str = None,
+        llm: str = "openai",
+        use_dynamic_section_headers: bool = False,
+    ):
+        obj = cls(docs, llm=llm)
+        obj.mission = mission or await obj.find_the_mission()
         if use_dynamic_section_headers:
-            self._create_dynamic_section_headers()
+            await obj.create_dynamic_section_headers()
+        return obj
 
-    def _find_the_mission(self) -> str:
-        response = self.index.query(
+    async def find_the_mission(self) -> str:
+        response = await self.index.aquery(
             "What is a identified subject of interest with intelligence value "
             "to a Western government that is found in these documents? Respond in six words or less.",
             length_prompt="strictly six words or less",
@@ -70,9 +73,9 @@ class Mission:
             raise ValueError("No overall mission purpose was found in the documents.")
         return mission
 
-    def _create_dynamic_section_headers(self):
+    async def create_dynamic_section_headers(self):
         questions = []
-        response = self.index.query(
+        response = await self.index.aquery(
             f"Write a list of possible headers for an intelligence report on {self.mission} for "
             "a Western government in Python list format. For example, but don't copy this "
             'exactly: ["Executive Summary","Current Landscape and Key Actors","Recent '
@@ -94,7 +97,7 @@ class Mission:
         self.questions = questions
         self.section_headers = headers
 
-    def write_report(
+    async def write_report(
         self,
         inline_context: bool = False,
         inline_refs: bool = False,
@@ -102,7 +105,7 @@ class Mission:
     ) -> str:
         report = "INTELLIGENCE REPORT: {}\n\n".format(self.mission)
         for i, question in enumerate(self.questions):
-            response = self.index.query(
+            response = await self.index.aquery(
                 question.format(self.mission), length_prompt=self.length_prompts[length]
             )
             if (
