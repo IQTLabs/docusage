@@ -91,6 +91,11 @@ document.getElementById('createReport').addEventListener('click', async (e) => {
     }
 
     const report = await response.json();
+    if (report.error) {
+        alert(report.error);
+        return;
+    }
+
     const reportArea = document.getElementById('reportContent');
     // Convert markdown to HTML
     reportArea.innerHTML = marked.parse(report.content);

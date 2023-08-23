@@ -70,7 +70,9 @@ class Mission:
         if mission.endswith("."):
             mission = mission[:-1]
         if "I cannot answer" in mission or "I can't answer" in mission:
-            raise ValueError("No overall mission purpose was found in the documents.")
+            raise ValueError(
+                "No overall mission purpose was found in the documents. Please manually provide a mission."
+            )
         return mission
 
     async def create_dynamic_section_headers(self):
