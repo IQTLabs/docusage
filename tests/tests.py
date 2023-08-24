@@ -69,3 +69,26 @@ async def test_dynamic_section_headers():
         )
         > 0
     )
+
+
+@pytest.mark.asyncio
+async def test_references():
+    """
+    Test if DocuSage references the correct documents.
+    """
+    mission = await Mission.create(
+        docs=[get_file("IF11333.pdf"), get_file("R47114.pdf")],
+        use_dynamic_section_headers=True,
+        mission="Gain of Function Research",
+    )
+    assert len(mission.section_headers) > 0
+    assert len(mission.questions) > 0
+    assert len(mission.section_headers) == len(mission.questions)
+
+    report = await mission.write_report(inline_refs=True, length="tiny")
+    report = report.lower()
+    assert "deep fake" not in report
+    assert "deepfake" not in report
+    assert "if11333" not in report
+    assert "gain of function" in report
+    assert "references" in report
