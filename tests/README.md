@@ -55,7 +55,12 @@ DocuSage should generate a report, sans errors.
 **Expected Outcome**:
 References in the DocuSage report should align with the known references from the document batch.
 
-**Metrics**:
+**Unit Test**:
+```bash
+pytest test.py::test_references
+```
+
+**Possible Metrics**:
 - **True Positive Rate \(TPR\)**: Proportion of correctly identified references to the total relevant references.
 - **False Positive Rate \(FPR\)**: Proportion of inaccurately identified references to the overall references noted.
 
@@ -71,5 +76,5 @@ References in the DocuSage report should align with the known references from th
 **Expected Outcome**:
 In scenarios with inadequate or unrelated references, DocuSage should either clearly highlight the lack of relevant data, abstain from making unsubstantiated statements, or throw an error.
 
-**Metrics**:
+**Possible Metrics**:
 - **Hallucination Rate**: Proportion of flawed reports generated compared to the total number of unsuitable inputs.
