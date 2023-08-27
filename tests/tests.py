@@ -5,7 +5,9 @@ from docusage.analyzer import Mission
 
 
 def get_file(name: str) -> str:
-    return os.path.join(os.path.dirname(os.path.abspath(__file__)), "docs", name)
+    return os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), "docs", "unit_tests", name
+    )
 
 
 ### CODE AND STRUCTURE TESTS ###
