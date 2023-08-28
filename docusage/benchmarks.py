@@ -1,3 +1,4 @@
+from argparse import ArgumentParser
 import asyncio
 from glob import glob
 import os
@@ -129,7 +130,27 @@ async def reference_hallucination_benchmark(max_report_pairs=25):
 
 
 async def async_main():
-    metrics = await reference_accuracy_benchmark()
+    parser = ArgumentParser(description="DocuSage benchmarking tool")
+    parser.add_argument(
+        "--max-report-pairs",
+        "-n",
+        type=int,
+        required=False,
+        default=2,
+        help="the number of report pairs to generate",
+    )
+    parser.add_argument(
+        "--report-path",
+        "-o",
+        type=str,
+        required=False,
+        default=None,
+        help="the path to save the reports",
+    )
+    args = parser.parse_args()
+    metrics = await reference_accuracy_benchmark(
+        args.max_report_pairs, args.report_path
+    )
     print(metrics)
 
 
