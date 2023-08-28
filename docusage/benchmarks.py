@@ -30,12 +30,15 @@ def check_if_ai(doc: str) -> bool:
 
 
 def check_if_biosecurity(doc: str) -> bool:
-    return (
-        "biosecurity" in doc.lower()
-        or "global health" in doc.lower()
-        or "bioeconomy" in doc.lower()
-        or "gain of function research" in doc.lower()
-        or "pathogen" in doc.lower()
+    return any(
+        keyword in doc.lower()
+        for keyword in [
+            "biosecurity",
+            "global health",
+            "bioeconomy",
+            "gain of function research",
+            "pathogen",
+        ]
     )
 
 
