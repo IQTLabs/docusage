@@ -52,11 +52,12 @@ class Mission:
         mission: str = None,
         llm: str = "openai",
         use_dynamic_section_headers: bool = False,
+        ignore_failures: bool = False,
     ):
         obj = cls(docs, llm=llm)
         obj.mission = mission or await obj.find_the_mission()
         if use_dynamic_section_headers:
-            await obj.create_dynamic_section_headers()
+            await obj.create_dynamic_section_headers(ignore_failure=ignore_failures)
         return obj
 
     async def find_the_mission(self) -> str:
@@ -75,7 +76,7 @@ class Mission:
             )
         return mission
 
-    async def create_dynamic_section_headers(self):
+    async def create_dynamic_section_headers(self, ignore_failure: bool = False):
         questions = []
         response = await self.index.aquery(
             f"Write a list of possible headers for an intelligence report on {self.mission} for "
@@ -86,6 +87,8 @@ class Mission:
         )
         headers = response.answer
         if "I cannot answer" in headers or "I can't answer" in headers:
+            if ignore_failure:
+                return
             raise ValueError("No headers were able to be generated from the documents.")
 
         headers = headers.split("(")[0].strip()
