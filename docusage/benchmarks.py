@@ -1,7 +1,7 @@
-from argparse import ArgumentParser
 import asyncio
-from glob import glob
 import os
+from argparse import ArgumentParser
+from glob import glob
 from logging import getLogger
 
 from tqdm.asyncio import tqdm
