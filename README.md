@@ -28,11 +28,31 @@ Example command line usage:
 docusage ./doc1.txt ./doc2.txt --mission "Novel weapons systems"
 ```
 
-In this command, `docusage` is the command-line interface for our tool. The arguments `./doc1.txt` and `./doc2.txt` are the files that we want to analyze. You can provide as many files as you want.
+`docusage` is the command-line interface of DocuSage. Here's a breakdown of its switches and arguments:
 
-The `--mission` or `-m` option allows you to specify a mission prompt, such as "Novel weapons systems". This prompt guides the analysis report that DocuSage creates based on the provided documents.
+### Positional Arguments
 
-After running this command, DocuSage will process the provided files and display the results. Note that the `--mission` option is optional. If you don't provide a prompt, DocuSage will perform a default analysis of the documents.
+- **FILES**: These are the files you want the tool to analyze. You can specify multiple files for analysis. In the example, `./doc1.txt` and `./doc2.txt` are the two files being analyzed.
+
+### Options
+
+- **-h, --help**: Displays the help message for the command and exits.
+
+- **--output OUTPUT, -o OUTPUT**: Allows you to specify an optional output file path where you want to save the analysis report.
+
+- **--mission MISSION, -m MISSION**: This option lets you specify an optional mission prompt, such as "Novel weapons systems". The prompt guides the analysis report created by DocuSage based on the documents.
+
+- **--no-inline-references, -r**: Use this switch if you don't want references included in the report.
+
+- **--no-inline-context, -c**: If set, the report won't include context excerpts from the source documents.
+
+- **--length {tiny,small,medium,large,xlarge}, -n {tiny,small,medium,large,xlarge}**: Specifies the length of the generated report. Choose from one of the available sizes: tiny, small, medium, large, xlarge. If not specified, the default length of medium will be chosen.
+
+- **--use-dynamic-sections, -d**: When this switch is used, the LLM dynamically generates section headers for the report. It provides a more structured and organized report layout based on the content being analyzed.
+
+- **--llm LLM, -l LLM**: EXPERIMENTAL. Specifies which Large Language Model (LLM) you want to use for the analysis, registered on HuggingFace Hub. If not specified, the default LLMs (GPT3.5 and GPT4 for different tasks) from OpenAI will be used.
+
+After you execute the command, DocuSage processes the provided files and displays the results. If you don't provide a mission using the `--mission` switch, DocuSage will carry out a general analysis of the documents and attempt to generate a title for it.
 
 ### Running built in web UI with Uvicorn
 
