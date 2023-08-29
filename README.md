@@ -56,7 +56,7 @@ gunicorn docusage.web:app -w 4 -k uvicorn.workers.UvicornWorker
 
 ### OpenAI API Key Requirement
 
-To use DocuSage, you need to have an account with OpenAI and an associated API key. The API key is used to interact with OpenAI's models, which are at the core of DocuSage's document analysis capabilities.
+By default to use DocuSage, you need to have an account with OpenAI and an associated API key. The API key is used to interact with OpenAI's models, which are at the core of DocuSage's document analysis capabilities.
 
 Here are the steps you need to follow to set up the OpenAI API key:
 
