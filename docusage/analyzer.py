@@ -36,12 +36,13 @@ class Mission:
         llm: str = "openai",
     ):
         if llm == "openai":
-            llm = OpenAI(max_tokens=500, temperature=0)
+            self.index = Docs()
         else:
-            llm = HuggingFaceHub(
-                repo_id=llm, model_kwargs={"temperature": 0, "max_length": 500}
+            llm = Docs(
+                HuggingFaceHub(
+                    repo_id=llm, model_kwargs={"temperature": 0, "max_length": 2056}
+                )
             )
-        self.index = Docs(llm=llm)
         for doc in docs:
             self.index.add(doc)
 
