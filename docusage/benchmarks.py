@@ -148,11 +148,17 @@ async def reference_hallucination_benchmark(
 async def async_main():
     parser = ArgumentParser(description="DocuSage benchmarking tool")
     parser.add_argument(
+        "BENCHMARK",
+        type=str,
+        choices=["accuracy", "hallucination"],
+        help="the benchmark to run",
+    )
+    parser.add_argument(
         "--max-report-pairs",
         "-n",
         type=int,
         required=False,
-        default=2,
+        default=25,
         help="the number of report pairs to generate",
     )
     parser.add_argument(
@@ -164,9 +170,16 @@ async def async_main():
         help="the path to save the reports",
     )
     args = parser.parse_args()
-    metrics = await reference_accuracy_benchmark(
-        args.max_report_pairs, args.report_path
-    )
+    if args.BENCHMARK == "hallucination":
+        metrics = await reference_hallucination_benchmark(
+            args.max_report_pairs, args.report_path
+        )
+    elif args.BENCHMARK == "accuracy":
+        metrics = await reference_accuracy_benchmark(
+            args.max_report_pairs, args.report_path
+        )
+    else:
+        raise ValueError(f"Unknown benchmark: {args.BENCHMARK}")
     print(metrics)
 
 
