@@ -46,8 +46,8 @@ def check_if_biosecurity(doc: str) -> bool:
     )
 
 
-def check_hallucinations(doc: str, mission: str) -> bool:
-    pass
+def check_hallucinations(doc: str, num_headers: int) -> int:
+    return doc.count("### ") / num_headers
 
 
 async def reference_accuracy_benchmark(
@@ -101,7 +101,9 @@ async def reference_accuracy_benchmark(
     return metrics
 
 
-async def reference_hallucination_benchmark(max_report_pairs=25):
+async def reference_hallucination_benchmark(
+    max_report_pairs: int = 2, report_path: str = None
+):
     pbar = tqdm(
         total=max_report_pairs * 2,
         desc="Generating and testing reports",
@@ -110,7 +112,7 @@ async def reference_hallucination_benchmark(max_report_pairs=25):
     metrics = {"Artificial intelligence": 0, "Biosecurity": 0}
 
     for i, (biosecurity_docs, ai_docs) in enumerate(get_document_pairs()):
-        if i > max_report_pairs:
+        if i >= max_report_pairs:
             break
         for mission_type in ["Artificial intelligence", "Biosecurity"]:
             if mission_type == "Artificial intelligence":
@@ -121,9 +123,23 @@ async def reference_hallucination_benchmark(max_report_pairs=25):
                 docs,
                 mission_type,
                 use_dynamic_section_headers=True,
+                ignore_failures=True,
             )
             report = await mission.write_report(inline_refs=True, length="tiny")
-            int(check_hallucinations(report, mission_type))
+            if report_path:
+                if not os.path.exists(report_path):
+                    os.makedirs(report_path)
+                with open(
+                    os.path.join(report_path, f"{i}_{mission_type}.txt"), "w"
+                ) as f:
+                    f.write(report)
+
+            hallucination_delta = (
+                check_hallucinations(report, len(mission.section_headers))
+                / max_report_pairs
+            )
+            metrics[mission_type] += hallucination_delta
+
             pbar.update(1)
     pbar.close()
     return metrics
