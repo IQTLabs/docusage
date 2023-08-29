@@ -40,6 +40,11 @@ YurtAI's evaluations revealed that popular open-source LLMs, when not fine-tuned
 **Expected Outcome**:
 DocuSage should generate a report, sans errors.
 
+**Unit Test**:
+```bash
+pytest test.py::test_initialization
+```
+
 **Metrics**:
 - **Pass/Fail**: A binary metric to determine if the report generation was successful.
 
@@ -60,7 +65,12 @@ References in the DocuSage report should align with the known references from th
 pytest test.py::test_references
 ```
 
-**Possible Metrics**:
+**Benchmark**:
+```bash
+docusage_benchmark accuracy
+```
+
+**Metrics**:
 - **True Positive Rate \(TPR\)**: Proportion of correctly identified references to the total relevant references.
 - **False Positive Rate \(FPR\)**: Proportion of inaccurately identified references to the overall references noted.
 
@@ -76,5 +86,15 @@ pytest test.py::test_references
 **Expected Outcome**:
 In scenarios with inadequate or unrelated references, DocuSage should either clearly highlight the lack of relevant data, abstain from making unsubstantiated statements, or throw an error.
 
-**Possible Metrics**:
+**Unit Test**:
+```bash
+pytest test.py::test_irrelevant_documents_should_create_not_create_a_mission
+```
+
+**Benchmark**:
+```bash
+docusage_benchmark hallucination
+```
+
+**Metrics**:
 - **Hallucination Rate**: Proportion of flawed reports generated compared to the total number of unsuitable inputs.
