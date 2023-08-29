@@ -1,6 +1,5 @@
 import argparse
 import asyncio
-import os
 
 from docusage.analyzer import Mission
 
@@ -14,11 +13,6 @@ LOGO = r"""
 
 
 async def async_main():
-    if not os.environ.get("OPENAI_API_KEY"):
-        raise ValueError(
-            "The environment variable OPENAI_API_KEY is not set. You must have a paid OpenAI account to use DocuSage."
-        )
-
     parser = argparse.ArgumentParser(
         description=f"{LOGO}\nGenerate an intelligence report from a set of documents.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -80,13 +74,6 @@ async def async_main():
     )
 
     args = parser.parse_args()
-
-    if args.llm != "openai":
-        if not os.environ.get("HUGGINGFACEHUB_API_TOKEN"):
-            raise ValueError(
-                "The environment variable HUGGINGFACE_API_KEY is not set. "
-                "You must have a HuggingFace account to use DocuSage with a custom LLM."
-            )
 
     print(LOGO)
     print("Analyzing documents:", args.files)

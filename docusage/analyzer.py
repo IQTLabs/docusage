@@ -1,6 +1,8 @@
-from typing import Iterable, List, Dict
+import os
+from typing import Dict, Iterable, List
+
+from langchain.llms import HuggingFaceHub, OpenAI
 from paperqa import Docs
-from langchain.llms import OpenAI, HuggingFaceHub
 
 
 class Mission:
@@ -36,8 +38,18 @@ class Mission:
         llm: str = "openai",
     ):
         if llm == "openai":
+            if not os.environ.get("OPENAI_API_KEY"):
+                raise ValueError(
+                    "The environment variable OPENAI_API_KEY is not set. By default, "
+                    "you must have a paid OpenAI account to use DocuSage."
+                )
             self.index = Docs()
         else:
+            if not os.environ.get("HUGGINGFACEHUB_API_TOKEN"):
+                raise ValueError(
+                    "The environment variable HUGGINGFACE_API_KEY is not set. "
+                    "You must have a HuggingFace account to use DocuSage with a custom LLM."
+                )
             llm = Docs(
                 HuggingFaceHub(
                     repo_id=llm, model_kwargs={"temperature": 0, "max_length": 2056}
