@@ -98,3 +98,46 @@ docusage_benchmark hallucination
 
 **Metrics**:
 - **Hallucination Rate**: Proportion of flawed reports generated compared to the total number of unsuitable inputs.
+
+### 5. Running this Test Report Automatically with the DocuSage Benchmark Tool
+
+DocuSage benchmarking tool aids in testing the efficacy of DocuSage's report generation capability. Specifically, the tool provides ways to measure the accuracy of reference citations and determine the extent of hallucinations in generated reports.
+
+### Usage
+
+The benchmarking tool, `docusage_benchmark`, can be executed via command line with several options to customize the benchmarking process.
+
+#### General Syntax
+
+```bash
+docusage_benchmark {accuracy,hallucination} [OPTIONS]
+```
+
+Where `{accuracy,hallucination}` is a mandatory argument denoting the benchmarking test to run, and `[OPTIONS]` are optional flags to customize the benchmarking.
+
+#### Arguments:
+- `{accuracy,hallucination}`: This positional argument specifies the type of benchmarking test to run. Choose between:
+  - `accuracy`: To check the accuracy in reference citation.
+  - `hallucination`: To test the system's behavior when adequate references are absent.
+
+#### Options:
+- `-h, --help`: Display the help message and exits.
+- `--max-report-pairs MAX_REPORT_PAIRS, -n MAX_REPORT_PAIRS`: Determine the number of report pairs the tool should generate for the benchmarking test. This can be helpful to scale the test to a desired number of inputs. While a higher value can yield more precise results, it also extends test duration and increases API costs.
+- `--report-path REPORT_PATH, -o REPORT_PATH`: Specify the path where the generated reports should be saved.
+
+### Examples:
+
+1. **Running the accuracy benchmark without additional options**:
+    ```bash
+    docusage_benchmark accuracy
+    ```
+
+2. **Testing for hallucinations with a specific number of report pairs and saving the reports**:
+    ```bash
+    docusage_benchmark hallucination --max-report-pairs 25 -o /path/to/save/reports
+    ```
+
+3. **Viewing the help message**:
+    ```bash
+    docusage_benchmark -h
+    ```
