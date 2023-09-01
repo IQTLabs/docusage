@@ -71,8 +71,7 @@ docusage_benchmark accuracy
 ```
 
 **Metrics**:
-- **True Positive Rate \(TPR\)**: Proportion of correctly identified references to the total relevant references.
-- **False Positive Rate \(FPR\)**: Proportion of inaccurately identified references to the overall references noted.
+- **Error Rate**: The proportion of reports which contain at least one inaccurate reference to total amount of reports.
 
 ### 4. Assessing Behavior in Absence of Adequate References
 
@@ -97,7 +96,7 @@ docusage_benchmark hallucination
 ```
 
 **Metrics**:
-- **Hallucination Rate**: Proportion of flawed reports generated compared to the total number of unsuitable inputs.
+- **Hallucination Rate**: Proportion of flawed report headers with content generated compared to the total number of potential unsuitable inputs.
 
 ### 5. Running this Test Report Automatically with the DocuSage Benchmark Tool
 
