@@ -56,6 +56,8 @@ After you execute the command, DocuSage processes the provided files and display
 
 ### Running built in web UI with Uvicorn
 
+![Screenshot of DocuSage Usage](docusage_web.png)
+
 To start DocuSage using [Uvicorn](https://www.uvicorn.org), use the following command:
 
 ```bash
