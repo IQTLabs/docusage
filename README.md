@@ -25,7 +25,7 @@ poetry install
 Example command line usage:
 
 ```bash
-docusage ./doc1.txt ./doc2.txt --mission "Novel weapons systems"
+docusage ./doc1.txt ./doc2.txt --mission "Economy of Canada"
 ```
 
 `docusage` is the command-line interface of DocuSage. Here's a breakdown of its switches and arguments:
@@ -40,7 +40,7 @@ docusage ./doc1.txt ./doc2.txt --mission "Novel weapons systems"
 
 - **--output OUTPUT, -o OUTPUT**: Allows you to specify an optional output file path where you want to save the analysis report.
 
-- **--mission MISSION, -m MISSION**: This option lets you specify an optional mission prompt, such as "Novel weapons systems". The prompt guides the analysis report created by DocuSage based on the documents.
+- **--mission MISSION, -m MISSION**: This option lets you specify an optional mission prompt, such as "Economy of Canada". The prompt guides the analysis report created by DocuSage based on the documents.
 
 - **--no-inline-references, -r**: Use this switch if you don't want references included in the report.
 
