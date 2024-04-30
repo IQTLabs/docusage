@@ -13,7 +13,7 @@ openai = "^0.27"
 pdf2image = "^1.16"
 chromadb = "^0.3"
 tiktoken = "^0.4"
-fastapi = "^0.95"
+fastapi = "^0.109"
 python-multipart = "^0.0"
 paper-qa = "^3.7.0"
 
