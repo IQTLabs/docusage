@@ -4,7 +4,7 @@ Welcome to DocuSage - a fast, automated, and AI-fueled document analysis tool. H
 
 Imagine having an intelligent assistant, ready to dive into the haystack of information, pulling out not just the needle but the essential threads of value. That's DocuSage for you - your personal intelligence analyst, on call 24/7.
 
-DocuSage accepts custom intelligence missions and capably handles multiple documents simultaneously, not only simplifying but enriching your document analysis tasks. It ensures you don't miss those crucial "needle-in-the-haystack" insights that can easily get lost in the sea of information.
+DocuSage accepts a custom mission and capably handles multiple documents simultaneously, not only simplifying but enriching your document analysis tasks. It ensures you don't miss those crucial "needle-in-the-haystack" insights that can easily get lost in the sea of information.
 
 DocuSage also features a user-friendly Web UI, making it even more accessible and easy to navigate through your document analysis tasks.
 
